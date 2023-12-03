@@ -1,15 +1,13 @@
 import React from "react";
 import Link from "next/link";
 import Head from "next/head"; 
+const API_KEY = process.env.PUBLIC_API_KEY
+const BASE_URL = process.env.PUBLIC_BASE_URL
 
- const API_KEY = process.env.PUBLIC_API_KEY
- const BASE_URL = process.env.PUBLIC_BASE_URL
 export const getStaticProps = async () => {
-  const res = await fetch(`${BASE_URL}/discover/movie?language=en-US&api_key=${API_KEY}`)
+  const res = await fetch(` ${BASE_URL}/discover/movie?language=en-US&api_key=${API_KEY}`) 
   const data = await res.json()
   const movies = data.results;
-   console.log(movies);
- 
   return {
     props: { movies }
   }
@@ -39,4 +37,20 @@ const MoviesList = ({ movies }) => {
   );
 };
 export default MoviesList;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
