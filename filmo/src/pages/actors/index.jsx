@@ -4,7 +4,6 @@ function Actors() {
   return (
     <>
       <div>Actors</div>
-      <div>hiii</div>
     </>
   )
 }
