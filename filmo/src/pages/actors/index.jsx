@@ -47,6 +47,7 @@ export default function Index() {
   if (!actors) return <p>No profile data</p>
 
   const handleActorsNameSubmit = (event) => {
+<<<<<<< HEAD
     event.preventDefault();
   };
 
@@ -120,3 +121,102 @@ export default function Index() {
 
 
 
+=======
+    event.preventDefault()
+  }
+
+  const handleSelectChange = (event) => {
+    const actorId = event.target.value
+    setSelectedActorId(actorId)
+
+    if (actorId) {
+      router.push(`/actors/${actorId}`)
+    }
+  }
+
+  return (
+    <div className="bg-gradient-to-l from-black to-indigo-900  min-h-screen text-zinc-400">
+      <div className="bg-gradient-to-l from-sky-800 to-indigo-700 bg-cover p-4  ">
+        <h1 className="text-center animated-gradient text-5xl font-bold">
+          ⭐FILMO⭐
+        </h1>
+
+        <label
+          htmlFor="search-bar"
+          className="mb-2 text-gray-700 text-sm font-semibold"
+        >
+          lets search here:{" "}
+        </label>
+        <form
+          onSubmit={handleActorsNameSubmit}
+          id="search-bar"
+          className="flex"
+        >
+          <select
+            value={actors}
+            onChange={handleSelectChange}
+            className="animated-gradient text-1xl
+                 font-bold bg-sky-800 text-black
+                 rounded-lg p-2 border focus:outline-none focus:ring "
+            placeholder="options"
+          >
+            {actors &&
+              actors.map((user) => (
+                <option key={user.id} value={user.id}>
+                  <Link href={`/actors/${user.id}`} key={user.id}>
+                    {user.name}
+                  </Link>
+                </option>
+              ))}
+          </select>
+        </form>
+      </div>
+      <h1 className=" w-full flex justify-center pt-4 text-3xl font-bold bg-black rounded-full text-sky-700 px-6 py-3">
+        Actors
+      </h1>
+      <div className="flex justify-center bg-gradient-to-l from-black to-indigo-900  shadow-lg rounded-lg p-6 w-full">
+        <div className="grid grid-cols-4 gap-4 max-w-6xl w-full">
+          {actors &&
+            actors.map((user) => (
+              <Link href={`/actors/${user.id}`} key={user.id}>
+                <div
+                  key={user.id}
+                  className="flex flex-col items-start bg-black hover:bg-sky-800 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out shadow-lg"
+                >
+                  <img
+                    src={`https://image.tmdb.org/t/p/w780/${user.profile_path}`}
+                    width={500}
+                    height={500}
+                    alt="poster"
+                  />
+                  <div className="p-4">
+                    <span className="text-lg block truncate">
+                      ⭐ {user.name} ⭐
+                    </span>
+                    <span className="text-sm text-gray-100">
+                      Original Name: {user.original_name}
+                    </span>
+                    <div className="flex flex-col space-y-1 mt-2">
+                      <span className="text-sm font-medium text-gray-200 dark:text-gray-300">
+                        Popularity:
+                      </span>
+                      <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                        <div
+                          className="bg-sky-700 h-2.5 rounded-full transition-all duration-300 ease-in-out"
+                          style={{
+                            width: `${Math.min(user.popularity, 100) * 1}%`,
+                          }}
+                          title={`Popularity: ${user.popularity.toFixed(2)}`}
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+>>>>>>> e594a95f6716f7c3872acda76c9d168b332ae317
