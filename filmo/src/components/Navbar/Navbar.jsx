@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from "react"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import {
-  getGenres,
-  getTopRatedMovies,
-  getPopularMovies,
-  getLatestMovies,
-  getNowPlaying,
-  getUpComing,
-} from "@component/util/requests"
+import { getGenres, getSearchMovies } from "@component/util/requests"
 
 function Navbar() {
   const router = useRouter()
@@ -16,6 +9,7 @@ function Navbar() {
   const [showMovies, setShowMovies] = useState(false)
   const [genres, setGenres] = useState([])
   const [movieCategories, setMovieCategories] = useState([])
+  const [searchQuery, setSearchQuery] = useState("")
 
   useEffect(() => {
     async function fetchData() {
@@ -23,18 +17,12 @@ function Navbar() {
         const fetchedGenres = await getGenres()
         setGenres(fetchedGenres)
 
-        const topRated = await getTopRatedMovies()
-        const popular = await getPopularMovies()
-        const latest = await getLatestMovies()
-        const nowPlaying = await getNowPlaying()
-        const upcoming = await getUpComing()
-
         setMovieCategories([
-          { title: "Top Rated", data: topRated },
-          { title: "Popular", data: popular },
-          { title: "Latest", data: latest },
-          { title: "Now Playing", data: nowPlaying },
-          { title: "Upcoming", data: upcoming },
+          { title: "Top Rated" },
+          { title: "Popular" },
+          { title: "Latest" },
+          { title: "Now Playing" },
+          { title: "Upcoming" },
         ])
       } catch (error) {
         console.error("Error fetching data:", error)
@@ -53,12 +41,38 @@ function Navbar() {
 
   const navigateToMoviesByGenre = (genreId) => {
     router.push(`/movies?genre=${genreId}`)
-    setShowGenres(false) // Hide genres dropdown after selection
+    setShowGenres(false)
   }
 
   const navigateToMovieCategory = (category) => {
     router.push(`/movies/${category.toLowerCase().replace(" ", "-")}`)
-    setShowMovies(false) // Hide movies dropdown after category selection
+    setShowMovies(false)
+  }
+
+  const handleSearch = async () => {
+    try {
+      // Check if the search query is not empty
+      if (searchQuery.trim() !== "") {
+        const searchResults = await getSearchMovies(searchQuery)
+
+        // Redirect to search results page and pass search query as query param
+        router.push(`/search?query=${encodeURIComponent(searchQuery)}`)
+
+        // Log the search results for reference
+        console.log("Search Results:", searchResults)
+
+        // Clear search query after redirecting
+        setSearchQuery("")
+      }
+    } catch (error) {
+      console.error("Error fetching search results:", error)
+    }
+  }
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSearch()
+    }
   }
 
   return (
@@ -97,17 +111,22 @@ function Navbar() {
           )}
         </span>
         <span className="text-white">|</span>
-        <span className="text-white cursor-pointer" onClick={toggleMovies}>
+        <span
+          className="text-white cursor-pointer"
+          onClick={toggleMovies}
+          style={{ position: "relative" }}
+        >
           <span>Movies</span>
           {showMovies && (
             <div
-              className="absolute bg-black shadow-md mt-3 rounded-lg max-h-60 w-15 right-[260px] overflow-hidden"
+              className="absolute bg-black shadow-md mt-3 rounded-lg w-36"
+              style={{ top: "100%", right: -50 }}
               onWheel={(e) => {
                 const container = e.currentTarget
                 container.scrollTop += e.deltaY
               }}
             >
-              <div className="p-2" style={{ marginRight: "-16px" }}>
+              <div className="p-2">
                 {movieCategories.map((category, index) => (
                   <span
                     key={index}
@@ -121,6 +140,7 @@ function Navbar() {
             </div>
           )}
         </span>
+
         {/* Retain other Navbar items */}
         <span className="text-white">|</span>
         <span
@@ -129,12 +149,20 @@ function Navbar() {
         >
           Actors
         </span>
-        <span className="text-white">|</span>
-        <a className="text-white cursor-pointer ml-auto">
-          <span>Search</span>
-        </a>
       </div>
-      <button className="ml-auto">button</button>
+      {/* Search Input Field */}
+      <input
+        type="text"
+        placeholder="Search movies..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        onKeyDown={handleKeyPress}
+        className="bg-gray-200 px-3 py-1 rounded-md ml-auto"
+      />
+      {/* Search Button */}
+      <button className="text-white cursor-pointer" onClick={handleSearch}>
+        Search
+      </button>
     </div>
   )
 }

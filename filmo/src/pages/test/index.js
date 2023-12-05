@@ -34,7 +34,7 @@ export async function getServerSideProps() {
   }
 }
 
-function index({ nowPlayingMovies }) {
+function index({ latestMovies }) {
   return (
     <div>
       {/* <div className="grid grid-cols-4 gap-4 max-w-6xl w-full">
@@ -48,8 +48,8 @@ function index({ nowPlayingMovies }) {
         ))}
       </div> */}
       <div className="grid grid-cols-4 gap-4 max-w-6xl w-full">
-        {nowPlayingMovies.map((nowPlayingMovie) => (
-          <div key={nowPlayingMovie.id}>{nowPlayingMovie.title}</div>
+        {latestMovies.map((latestMovie) => (
+          <div key={latestMovie.id}>{latestMovie.title}</div>
         ))}
       </div>
     </div>
