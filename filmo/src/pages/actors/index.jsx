@@ -1,61 +1,39 @@
 import React ,{useEffect, useState} from 'react';
 import Link from 'next/link';
+// import { useRouter } from 'next/router';
+import actorsEffectFetching from '@component/util/API';
 
 
-// trending of people list 
-export const optionsTrending = {
-  method: 'GET',
-  headers: {
-    accept: 'application/json',
-    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2Y2FhZTlhZGM1MjA3Njk5ZDg1Y2ZmN2Y3YTMyMmI2ZSIsInN1YiI6IjY1NjZkNTIxYThiMmNhMDE0ZDUxYTIwNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.zm4mNzeuZSUcJFa8tVG6ldeD_8OY37zsxEAB8OKUpZI'
-    
-  }
-};
-
-export default function Index() {
+export default function Actors() {
+  // const router = useRouter();
   const [actors, setActors] = useState()
-  const [isLoading, setIsLoading] = useState(true)
+  
+  actorsEffectFetching(setActors); // fetching actors page 
 
-  useEffect(()=>{
-    fetch('https://api.themoviedb.org/3/trending/person/day?language=en-US&api_key=6caae9adc5207699d85cff7f7a322b6e', optionsTrending)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then((data)=>{
-      console.log(data.results);
-      setActors(data.results);
-    }) 
-    .catch(e=>console.log(e))
-
-    .finally(() => setIsLoading(false))
-  },[])
-
- 
   useEffect(()=>{ 
      document.title = `General page for Actors`
   }, []);
-
     
-  if (isLoading) return <p>Loading...</p>
-  if (!actors) return <p>No profile data</p>
-
-
-  
+  // if (!actors) return <p>No profile data</p>
   
   return (
-    <>
-    <div className="bg-gradient-to-l from-sky-800 to-indigo-700 bg-cover p-4  ">
-    <h1 className="text-center animated-gradient text-5xl font-bold">⭐FILMO⭐</h1>
-    </div>
-      <h1 className=" w-full flex justify-center pt-4 text-3xl font-bold bg-black rounded-full text-sky-700 px-6 py-3">Actors</h1>
-      <div className="flex justify-center bg-white shadow-lg rounded-lg p-6 w-full">
+    <div className='bg-gradient-to-r from-black from-40% to-blue-grey  min-h-screen   h-45 bg-cover p-4  text-zinc-100'>
+  
+      <h1 className="text-center animated-gradient 
+      text-5xl font-bold flex justify-center 
+      items-center">⭐FILMO⭐</h1>
+
+      <h1 className="  flex justify-center 
+      items-center w-full h-45 
+      animated-gradient font-bold text-4xl 
+         px-6 py-3">
+      Actors</h1>
+
+      <div className="flex justify-center bg-gradient-to-r from-black from-40% to-blue-grey shadow-lg rounded-lg p-6 w-full">
       <div className="grid grid-cols-4 gap-4 max-w-6xl w-full">
           {actors && actors.map((user) => (
             <Link href={`/actors/${user.id}`} key={user.id}>
-              <div key={user.id} className="flex flex-col items-start bg-black hover:bg-sky-800 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out shadow-lg">
+              <div key={user.id} className="flex flex-col items-start relative border-2 border-white  bg-black hover:bg-sky-800 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out shadow-lg">
               <img src={`https://image.tmdb.org/t/p/w780/${user.profile_path}`} width={500} height={500} alt="poster"/>
                   <div className="p-4">
                       <span className="text-lg block truncate">
@@ -82,7 +60,8 @@ export default function Index() {
           ))}   
       </div>
   </div>
-  </>
+
+  </div>
     );
   }
 
