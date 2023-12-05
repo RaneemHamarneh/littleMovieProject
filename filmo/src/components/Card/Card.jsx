@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { getMovieDetails } from "@component/util/requests"
+import getMovieDetails from "@component/util/requests"
 
 function Card({ movie }) {
   const IMAGE_BASE_URL = "https://www.themoviedb.org/t/p/w220_and_h330_face"

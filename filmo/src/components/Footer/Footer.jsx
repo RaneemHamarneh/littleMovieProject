@@ -20,7 +20,7 @@ function Footer() {
   ]
 
   return (
-    <footer className="bg-[#000] py-4 text-center absolute bottom-0 w-full">
+    <footer className="absolute bg-[#000] py-4 text-center bottom-0 w-full ">
       <div className="flex justify-center">
         {members.map((member, index) => (
           <div key={index} className="mx-4">
