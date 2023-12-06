@@ -6,14 +6,16 @@ const BASE_URL = process.env.PUBLIC_BASE_URL
 
 export const getServerSideProps = async (context) => {
   const { movieId } = context.params;
+
   const res1 = await fetch(`${BASE_URL}/movie/${movieId}?language=en-US&api_key=${API_KEY}`);
   const movie = await res1.json();
  
   const res2 = await fetch(`${BASE_URL}/movie/${movieId}/credits?language=en-US&api_key=${API_KEY}`);
   const movieCredits = await res2.json();
+
   const res3 = await fetch(`${BASE_URL}/movie/${movieId}/similar?api_key=${API_KEY}`);
   const relatedMovies = await res3.json();
-  console.log(relatedMovies)
+  
 
   const res4 = await fetch(`${BASE_URL}/movie/${movieId}/videos?language=en-US&api_key=${API_KEY}`);
   const movieTrailer = await res4.json();
@@ -52,16 +54,16 @@ const MovieDetails = ({ movie,movieCredits,relatedMovies ,movieTrailer }) => {
 
       {/*  ************************** Cast Members  **************************************** */}
             <div className="text-white">Cast Members: {movieCredits.cast.map((cast,index) => 
-            <div key={index}>{cast.order<5 ?cast.name :null }
+            <div key={index}><Link href={`/actors/${cast.id}`}>{cast.order<5 ?cast.name :null }
              {cast.order<5 ?<img src={`https://image.tmdb.org/t/p/w500/${cast.profile_path}`} width={70}
-              height={70} alt="profile_picture"/>:null}</div>) }</div>
+              height={70} alt="profile_picture"/>:null}</Link></div>) }</div>
     {/* ***************************** Cast Members  ******************************************** */}
 
     {/* ***************************** Related Movies  ******************************************** */}
              <div className="text-white"> {relatedMovies.results.map((el,index)=>(
-              <div key={index}>{el.title} 
+              <div key={index}><Link href={`/movies/${el.id}`}>{el.title} 
               <img  src={`https://image.tmdb.org/t/p/w500/${el.poster_path}`}
-              width={100} height={100} alt="Related_movies"/></div>))}
+              width={100} height={100} alt="Related_movies"/></Link></div>))}
               </div>
     {/* ***************************** Related Movies  ******************************************** */}
              
@@ -70,7 +72,7 @@ const MovieDetails = ({ movie,movieCredits,relatedMovies ,movieTrailer }) => {
             <div key={index} className="flex flex-col items-center">
             <h2 className="text-white font-medium">{company.name}</h2>
             <img src={`https://image.tmdb.org/t/p/w92/${company.logo_path}`} 
-             alt={company.name} width="100px" height="100px" className="object-cover rounded-lg"/></div>))}</div>
+            alt={company.name} width="100px" height="100px" className="object-cover rounded-lg"/></div>))}</div>
     {/* *****************************  Company name and logo ********************************** */}
 
     {/*  ******************************* Movie trailer  ****************************************** */}
@@ -80,7 +82,7 @@ const MovieDetails = ({ movie,movieCredits,relatedMovies ,movieTrailer }) => {
             title="Movie Trailer" frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media;
             gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
-    {/*  *************************** youtube trailer  ********************************************** */}
+    {/*  *************************** Movie trailer  ********************************************** */}
 
         </>
     
