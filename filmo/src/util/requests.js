@@ -247,10 +247,10 @@ export async function getMovieDetails(id) {
       options,
     )
     const data = await response.json()
-    return data // Return the fetched movie details
+    return data
   } catch (error) {
     console.error("Error fetching movie details:", error)
-    return null // Return null or handle the error accordingly
+    return null
   }
 }
 
