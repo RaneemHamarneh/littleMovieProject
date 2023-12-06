@@ -3,14 +3,9 @@ import Navbar from "../Navbar/Navbar"
 import Footer from "../Footer/Footer"
 import Head from "next/head"
 
-export const metadata = {
-  title: "CineWorld",
-  description: "A World of Cinema",
-}
-
 const Layout = ({ children }) => {
   return (
-    <div>
+    <div className="bg-gradient-to-r from-sky-950 to-indigo-950">
       <Head>
         <title>FILMO</title>
       </Head>

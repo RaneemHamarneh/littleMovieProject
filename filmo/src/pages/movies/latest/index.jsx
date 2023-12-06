@@ -14,7 +14,7 @@ export async function getServerSideProps() {
 function index({ movies }) {
   return (
     <div>
-      <div className="grid grid-cols-4 gap-4 max-w-6xl w-full">
+      <div className="grid grid-cols-5 gap-4 max-w-7xl w-full mx-auto page-container">
         {movies.map((movie) => (
           <div key={movie.id}>{movie.title}</div>
         ))}

@@ -1,6 +1,8 @@
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { getMoviesByGenre } from "@component/util/requests"
+import Card from "@component/components/Card/Card" // Update the path to your Card component
+
 function Movies() {
   const router = useRouter()
   const [movies, setMovies] = useState([])
@@ -21,9 +23,9 @@ function Movies() {
 
   return (
     <div>
-      <div className="grid grid-cols-4 gap-4 max-w-6xl w-full">
+      <div className=" page-container grid grid-cols-5 gap-4 max-w-7xl w-full mx-auto no-scrollbar">
         {movies.map((movie) => (
-          <div key={movie.id}>{movie.title}</div>
+          <Card key={movie.id} movie={movie} />
         ))}
       </div>
     </div>

@@ -51,17 +51,13 @@ function Navbar() {
 
   const handleSearch = async () => {
     try {
-      // Check if the search query is not empty
       if (searchQuery.trim() !== "") {
         const searchResults = await getSearchMovies(searchQuery)
 
-        // Redirect to search results page and pass search query as query param
         router.push(`/search?query=${encodeURIComponent(searchQuery)}`)
 
-        // Log the search results for reference
         console.log("Search Results:", searchResults)
 
-        // Clear search query after redirecting
         setSearchQuery("")
       }
     } catch (error) {
@@ -76,7 +72,7 @@ function Navbar() {
   }
 
   return (
-    <div className="sticky bg-[#000] top-0 z-[1000] flex items-center px-8 h-[72px]">
+    <div className="sticky bg-cyan-700 top-0 z-[1000] flex items-center px-8 h-[72px] md:backdrop-blur-lg bg-opacity-80 ">
       <Link href="/">
         <img
           src="/images/White logo - no background.png"
@@ -86,11 +82,11 @@ function Navbar() {
         />
       </Link>
       <div className="select-none ml-10 flex items-center space-x-4 md:space-x-8 lg:space-x-12 tracking-wide relative">
-        <span className="text-white cursor-pointer" onClick={toggleGenres}>
+        <span className="text-gray-200 cursor-pointer" onClick={toggleGenres}>
           <span>Genres</span>
           {showGenres && (
             <div
-              className="absolute bg-black shadow-md mt-3 rounded-lg max-h-60 w-15 left-[-40px] overflow-hidden"
+              className="absolute bg-cyan-700 shadow-md mt-3 rounded-lg max-h-60 w-15 left-[-40px] overflow-hidden"
               onWheel={(e) => {
                 const container = e.currentTarget
                 container.scrollTop += e.deltaY
@@ -100,7 +96,7 @@ function Navbar() {
                 {genres.map((genre) => (
                   <span
                     key={genre.id}
-                    className="block px-4 py-2 text-white hover:bg-gray-700 cursor-pointer"
+                    className=" block px-4 py-2 text-gray-200 hover:bg-cyan-900 cursor-pointer "
                     onClick={() => navigateToMoviesByGenre(genre.id)}
                   >
                     {genre.name}
@@ -110,16 +106,16 @@ function Navbar() {
             </div>
           )}
         </span>
-        <span className="text-white">|</span>
+        <span className="text-gray-200">|</span>
         <span
-          className="text-white cursor-pointer"
+          className="text-gray-200 cursor-pointer"
           onClick={toggleMovies}
           style={{ position: "relative" }}
         >
           <span>Movies</span>
           {showMovies && (
             <div
-              className="absolute bg-black shadow-md mt-3 rounded-lg w-36"
+              className="absolute bg-cyan-700 shadow-md mt-3 rounded-lg w-36"
               style={{ top: "100%", right: -50 }}
               onWheel={(e) => {
                 const container = e.currentTarget
@@ -130,7 +126,7 @@ function Navbar() {
                 {movieCategories.map((category, index) => (
                   <span
                     key={index}
-                    className="block px-4 py-2 text-white hover:bg-gray-700 cursor-pointer"
+                    className="block px-4 py-2 text-gray-200 hover:bg-cyan-900 cursor-pointer"
                     onClick={() => navigateToMovieCategory(category.title)}
                   >
                     {category.title}
@@ -141,26 +137,26 @@ function Navbar() {
           )}
         </span>
 
-        {/* Retain other Navbar items */}
-        <span className="text-white">|</span>
+        <span className="text-gray-200">|</span>
         <span
-          className="text-white cursor-pointer"
+          className="text-gray-200 cursor-pointer"
           onClick={() => router.push("/actors")}
         >
           Actors
         </span>
       </div>
-      {/* Search Input Field */}
       <input
         type="text"
-        placeholder="Search movies..."
+        placeholder="Search on FILMO"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         onKeyDown={handleKeyPress}
         className="bg-gray-200 px-3 py-1 rounded-md ml-auto"
       />
-      {/* Search Button */}
-      <button className="text-white cursor-pointer" onClick={handleSearch}>
+      <button
+        className="text-gray-200 cursor-pointer mx-2"
+        onClick={handleSearch}
+      >
         Search
       </button>
     </div>

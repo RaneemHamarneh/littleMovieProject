@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.page-container {
+  min-height: 100vh;
+  padding-top: 23px;
+}
+
+.footer {
+  flex-shrink: 0;
+  width: 100%;
+}
