@@ -21,7 +21,7 @@ export default function Actors() {
        font-bold font-serif text-5xl 
          px-6 py-3"
       >
-        🎬 Actors
+        Actors
       </h1>
 
       <div className="flex justify-center bg-gradient-to-r from-black from-40% to-blue-grey shadow-lg rounded-lg p-6 w-full">
