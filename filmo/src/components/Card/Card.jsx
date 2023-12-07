@@ -6,10 +6,11 @@ function Card({ movie }) {
   const DEFAULT_IMAGE_URL = "https://i.imgur.com/wjVuAGb.png"
 
   return (
-    <div>
+    <div className="text-white">
       <Link className="text-decoration-none" href={"/movies/" + movie.id}>
         <div
-          className=" shadow-xl p-3 mb-5 bg-gray-200 rounded"
+          className=" shadow-xl p-2 mb-5 bg-black 
+          rounded-lg border border-sky-700/95"
           style={{ width: "15rem" }}
         >
           <img
@@ -19,7 +20,7 @@ function Card({ movie }) {
                 : DEFAULT_IMAGE_URL
             }
             alt=""
-            className="rounded"
+            className="rounded-lg mb-4"
           />
           <div className="card-body" style={{ height: "210px" }}>
             <h5

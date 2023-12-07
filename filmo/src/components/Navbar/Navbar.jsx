@@ -72,7 +72,7 @@ function Navbar() {
   }
 
   return (
-    <div className="sticky bg-cyan-700 top-0 z-[1000] flex items-center px-8 h-[72px] md:backdrop-blur-lg bg-opacity-80 ">
+    <div className="sticky bg-sky-700/75 top-0 z-[1000] flex items-center px-8 h-[72px] md:backdrop-blur-lg bg-opacity-80 mb-4 ">
       <Link href="/">
         <img
           src="/images/White logo - no background.png"
@@ -151,7 +151,7 @@ function Navbar() {
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         onKeyDown={handleKeyPress}
-        className="bg-gray-200 px-3 py-1 rounded-md ml-auto"
+        className="bg-gray-200 text-black cursor-pointer px-2 py-1 rounded-md ml-auto"
       />
       <button
         className="text-gray-200 cursor-pointer mx-2"
