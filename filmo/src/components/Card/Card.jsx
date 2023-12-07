@@ -6,7 +6,7 @@ function Card({ movie }) {
   const DEFAULT_IMAGE_URL = "https://i.imgur.com/wjVuAGb.png"
 
   return (
-    <div className="text-white font-serif">
+    <div className="text-white">
       <Link className="text-decoration-none" href={"/movies/" + movie.id}>
         <div
           className=" shadow-xl p-2 mb-5 bg-black 

@@ -19,7 +19,6 @@ function Footer() {
     },
   ]
 
-  // GitHub repository link
   const githubRepoLink =
     "https://github.com/202309-EKTA-JO-FSW/movie-project-room-8"
 
@@ -28,7 +27,7 @@ function Footer() {
       <div className="flex justify-center select-none">
         {members.map((member, index) => (
           <div key={index} className="mx-4">
-            <p className="text-lg font-semibold text-white">{member.name}</p>
+            <p className="text-lg font-semibold text-gray-200">{member.name}</p>
             <div className="flex justify-center tracking-wide">
               <a
                 href={member.github}
@@ -50,11 +49,10 @@ function Footer() {
           </div>
         ))}
       </div>
-      {/* GitHub repository link section */}
       <div className="mt-2">
         <a
           href={githubRepoLink}
-          className="text-yellow-300/80 hover:underline"
+          className="text-blue-200 hover:underline"
           target="_blank"
           rel="noopener noreferrer"
         >
