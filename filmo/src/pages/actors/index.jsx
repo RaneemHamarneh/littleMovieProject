@@ -14,7 +14,8 @@ export default function Actors() {
   // if (!actors) return <p>No profile data</p>
 
   return (
-    <div className="bg-gradient-to-r from-black from-40% to-blue-grey  min-h-screen   h-45 bg-cover p-4  text-zinc-100">
+    <div className="bg-gradient-to-r from-black from-40% to-blue-grey 
+     min-h-screen   h-45 bg-cover p-4  text-zinc-100">
       <h1
         className="  flex justify-center 
       items-center w-full h-45 
@@ -24,7 +25,8 @@ export default function Actors() {
         Actors
       </h1>
 
-      <div className="flex justify-center bg-gradient-to-r from-black from-40% to-blue-grey shadow-lg rounded-lg p-6 w-full">
+      <div className="flex justify-center bg-gradient-to-r from-black from-40%
+       to-blue-grey shadow-lg rounded-lg p-6 w-full">
         <div className="grid grid-cols-4 gap-4 max-w-6xl w-full">
           {actors &&
             actors.map((user) => (
