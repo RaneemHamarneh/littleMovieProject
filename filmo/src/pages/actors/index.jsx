@@ -1,111 +1,37 @@
 import React, { useEffect, useState } from "react"
 import Link from "next/link"
-import { useRouter } from "next/router"
+import actorsEffectFetching from "@component/util/API"
 
-// trending of people list
-export const optionsTrending = {
-  method: "GET",
-  headers: {
-    accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2Y2FhZTlhZGM1MjA3Njk5ZDg1Y2ZmN2Y3YTMyMmI2ZSIsInN1YiI6IjY1NjZkNTIxYThiMmNhMDE0ZDUxYTIwNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.zm4mNzeuZSUcJFa8tVG6ldeD_8OY37zsxEAB8OKUpZI",
-  },
-}
-
-export default function Index() {
-  const router = useRouter()
+export default function Actors() {
   const [actors, setActors] = useState()
-  const [isLoading, setIsLoading] = useState(true)
-  const [selectedActorId, setSelectedActorId] = useState()
 
-  useEffect(() => {
-    fetch(
-      "https://api.themoviedb.org/3/trending/person/day?language=en-US&api_key=6caae9adc5207699d85cff7f7a322b6e",
-      optionsTrending,
-    )
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok")
-        }
-        return response.json()
-      })
-      .then((data) => {
-        console.log(data.results)
-        setActors(data.results)
-      })
-      .catch((e) => console.log(e))
-
-      .finally(() => setIsLoading(false))
-  }, [])
+  actorsEffectFetching(setActors) // fetching actors page
 
   useEffect(() => {
     document.title = `General page for Actors`
   }, [])
 
-  if (isLoading) return <p>Loading...</p>
-  if (!actors) return <p>No profile data</p>
-
-  const handleActorsNameSubmit = (event) => {
-    event.preventDefault()
-  }
-
-  const handleSelectChange = (event) => {
-    const actorId = event.target.value
-    setSelectedActorId(actorId)
-
-    if (actorId) {
-      router.push(`/actors/${actorId}`)
-    }
-  }
+  // if (!actors) return <p>No profile data</p>
 
   return (
-    <div className="bg-gradient-to-l from-black to-indigo-900  min-h-screen text-zinc-400">
-      <div className="bg-gradient-to-l from-sky-800 to-indigo-700 bg-cover p-4  ">
-        <h1 className="text-center animated-gradient text-5xl font-bold">
-          ⭐FILMO⭐
-        </h1>
-
-        <label
-          htmlFor="search-bar"
-          className="mb-2 text-gray-700 text-sm font-semibold"
-        >
-          lets search here:{" "}
-        </label>
-        <form
-          onSubmit={handleActorsNameSubmit}
-          id="search-bar"
-          className="flex"
-        >
-          <select
-            value={actors}
-            onChange={handleSelectChange}
-            className="animated-gradient text-1xl
-                 font-bold bg-sky-800 text-black
-                 rounded-lg p-2 border focus:outline-none focus:ring "
-            placeholder="options"
-          >
-            {actors &&
-              actors.map((user) => (
-                <option key={user.id} value={user.id}>
-                  <Link href={`/actors/${user.id}`} key={user.id}>
-                    {user.name}
-                  </Link>
-                </option>
-              ))}
-          </select>
-        </form>
-      </div>
-      <h1 className=" w-full flex justify-center pt-4 text-3xl font-bold bg-black rounded-full text-sky-700 px-6 py-3">
-        Actors
+    <div className="bg-gradient-to-r from-black from-40% to-blue-grey  min-h-screen   h-45 bg-cover p-4  text-zinc-100">
+      <h1
+        className="  flex justify-center 
+      items-center w-full h-45 
+       font-bold font-serif text-5xl 
+         px-6 py-3"
+      >
+        🎬 Actors
       </h1>
-      <div className="flex justify-center bg-gradient-to-l from-black to-indigo-900  shadow-lg rounded-lg p-6 w-full">
+
+      <div className="flex justify-center bg-gradient-to-r from-black from-40% to-blue-grey shadow-lg rounded-lg p-6 w-full">
         <div className="grid grid-cols-4 gap-4 max-w-6xl w-full">
           {actors &&
             actors.map((user) => (
               <Link href={`/actors/${user.id}`} key={user.id}>
                 <div
                   key={user.id}
-                  className="flex flex-col items-start bg-black hover:bg-sky-800 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out shadow-lg"
+                  className="flex flex-col items-start relative border-2 border-white  bg-black hover:bg-sky-800 text-white font-bold py-2 px-4 rounded transition duration-200 ease-in-out shadow-lg"
                 >
                   <img
                     src={`https://image.tmdb.org/t/p/w780/${user.profile_path}`}
@@ -114,9 +40,7 @@ export default function Index() {
                     alt="poster"
                   />
                   <div className="p-4">
-                    <span className="text-lg block truncate">
-                      ⭐ {user.name} ⭐
-                    </span>
+                    <span className="text-lg block truncate">{user.name}</span>
                     <span className="text-sm text-gray-100">
                       Original Name: {user.original_name}
                     </span>

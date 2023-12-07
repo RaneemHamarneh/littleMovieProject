@@ -65,7 +65,7 @@ export async function getTopRatedMovies() {
     const data = await response.json()
     return data.results || []
   } catch (error) {
-    console.error("Error fetching genres:", error)
+    console.error("Error fetching:", error)
     return []
   }
 }
@@ -88,7 +88,7 @@ export async function getPopularMovies() {
     const data = await response.json()
     return data.results || []
   } catch (error) {
-    console.error("Error fetching genres:", error)
+    console.error("Error fetching:", error)
     return []
   }
 }
@@ -111,7 +111,7 @@ export async function getLatestMovies() {
     const data = await response.json()
     return data.results || []
   } catch (error) {
-    console.error("Error fetching genres:", error)
+    console.error("Error fetching:", error)
     return []
   }
 }
@@ -134,7 +134,7 @@ export async function getNowPlaying() {
     const data = await response.json()
     return data.results || []
   } catch (error) {
-    console.error("Error fetching genres:", error)
+    console.error("Error fetching:", error)
     return []
   }
 }
@@ -157,7 +157,7 @@ export async function getUpComing() {
     const data = await response.json()
     return data.results || []
   } catch (error) {
-    console.error("Error fetching genres:", error)
+    console.error("Error fetching:", error)
     return []
   }
 }
@@ -180,7 +180,7 @@ export async function getTrendingMovies() {
     const data = await response.json()
     return data.results || []
   } catch (error) {
-    console.error("Error fetching genres:", error)
+    console.error("Error fetching:", error)
     return []
   }
 }
@@ -203,7 +203,7 @@ export async function getMoviesByGenre(genreId) {
     const data = await response.json()
     return data.results || []
   } catch (error) {
-    console.error("Error fetching genres:", error)
+    console.error("Error fetching:", error)
     return []
   }
 }
@@ -226,7 +226,7 @@ export async function getSearchMovies(query) {
     const data = await response.json()
     return data.results || []
   } catch (error) {
-    console.error("Error fetching genres:", error)
+    console.error("Error fetching:", error)
     return []
   }
 }

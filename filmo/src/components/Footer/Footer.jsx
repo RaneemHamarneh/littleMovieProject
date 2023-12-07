@@ -10,7 +10,7 @@ function Footer() {
     {
       name: "Hayder",
       github: "https://github.com/Hayder000",
-      linkedin: "https://www.linkedin.com/in/hayder-profile-url",
+      linkedin: "https://www.linkedin.com/in/hayder-abu-al-hummos-10409b2a3/",
     },
     {
       name: "Lina",
@@ -19,9 +19,13 @@ function Footer() {
     },
   ]
 
+  // GitHub repository link
+  const githubRepoLink =
+    "https://github.com/202309-EKTA-JO-FSW/movie-project-room-8"
+
   return (
-    <footer className=" bg-cyan-700 py-4 text-center flex flex-col justify-between ">
-      <div className="flex justify-center select-none ">
+    <footer className="bg-cyan-700 py-4 text-center flex flex-col justify-between">
+      <div className="flex justify-center select-none">
         {members.map((member, index) => (
           <div key={index} className="mx-4">
             <p className="text-lg font-semibold text-white">{member.name}</p>
@@ -45,6 +49,17 @@ function Footer() {
             </div>
           </div>
         ))}
+      </div>
+      {/* GitHub repository link section */}
+      <div className="mt-2">
+        <a
+          href={githubRepoLink}
+          className="text-blue-300 hover:underline"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          FILMO GitHub Repository
+        </a>
       </div>
     </footer>
   )
