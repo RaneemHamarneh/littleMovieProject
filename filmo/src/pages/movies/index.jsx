@@ -4,7 +4,7 @@ import Head from "next/head";
 
  const API_KEY = process.env.PUBLIC_API_KEY
  const BASE_URL = process.env.PUBLIC_BASE_URL
- 
+
 export const getServerSideProps = async () => {
 
   const res1 = await fetch(` ${BASE_URL}/movie/now_playing?language=en-US&api_key=${API_KEY}`) 
@@ -130,7 +130,13 @@ export const getServerSideProps = async () => {
   };
 }
 
-const MoviesList = ({ movies_now_playing,movies_top_rated, movies_popular , movies_upcoming,actionMovies,animationMovies,dramaMovies,familyMovies,fantasyMovies ,historyMovies,horrorMovies,musicalMovies,mysteryMovies,scienceFictionMovies,tvFilmMovies,thrillerMovies,westernMovies,adventureMovies,comedyMovies,krimiMovies,documentaryMovies,LiebesMovies,kriegsfilmMovies}) => {
+const MoviesList = ({
+   movies_now_playing,movies_top_rated, movies_popular ,
+    movies_upcoming,actionMovies,animationMovies,dramaMovies,
+    familyMovies,fantasyMovies ,historyMovies,horrorMovies,musicalMovies,
+    mysteryMovies,scienceFictionMovies,tvFilmMovies,thrillerMovies,
+    westernMovies,adventureMovies,comedyMovies,krimiMovies,documentaryMovies,
+    LiebesMovies,kriegsfilmMovies}) => {
   return (
     <>
      <Head>

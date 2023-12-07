@@ -1,11 +1,9 @@
 import React ,{useEffect, useState} from 'react';
 import Link from 'next/link';
-// import { useRouter } from 'next/router';
 import actorsEffectFetching from '@component/util/API';
 
 
 export default function Actors() {
-  // const router = useRouter();
   const [actors, setActors] = useState()
   
   actorsEffectFetching(setActors); // fetching actors page 
@@ -18,16 +16,12 @@ export default function Actors() {
   
   return (
     <div className='bg-gradient-to-r from-black from-40% to-blue-grey  min-h-screen   h-45 bg-cover p-4  text-zinc-100'>
-  
-      <h1 className="text-center animated-gradient 
-      text-5xl font-bold flex justify-center 
-      items-center">⭐FILMO⭐</h1>
 
       <h1 className="  flex justify-center 
       items-center w-full h-45 
-      animated-gradient font-bold text-4xl 
+       font-bold font-serif text-5xl 
          px-6 py-3">
-      Actors</h1>
+         🎬 Actors</h1>
 
       <div className="flex justify-center bg-gradient-to-r from-black from-40% to-blue-grey shadow-lg rounded-lg p-6 w-full">
       <div className="grid grid-cols-4 gap-4 max-w-6xl w-full">
@@ -37,7 +31,7 @@ export default function Actors() {
               <img src={`https://image.tmdb.org/t/p/w780/${user.profile_path}`} width={500} height={500} alt="poster"/>
                   <div className="p-4">
                       <span className="text-lg block truncate">
-                          ⭐ {user.name} ⭐
+                           {user.name} 
                       </span>
                       <span className="text-sm text-gray-100">
                           Original Name: {user.original_name}

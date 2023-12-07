@@ -22,32 +22,33 @@ export default function SingleActorPage() {
 
 
   // Fetching actors by id that cast in this moviesCredit  
-  useEffect(()=> {
-    fetch(`https://api.themoviedb.org/3/person/${router.query.actorId}/movie_credits?language=en-US&api_key={6caae9adc5207699d85cff7f7a322b6e}`, options)
-    .then(response => response.json())
-    .then(response => {
-      console.log(response);
-      setMoviesCredits(response.cast)
-    })
-    .catch(err => console.error(err))
-    .finally(() => setIsLoading(false))
-  },[])
-  
-  console.log(movieCredits);
-  // Fetching actors by id
-  useEffect(()=>{
-      fetch(`https://api.themoviedb.org/3/person/${router.query.actorId}?language=en-US&api_key=6caae9adc5207699d85cff7f7a322b6e`,
-       optionsTrending)
-      .then(response => response.json())
-      .then(response => {
-        console.log(response)
-        setActor(response)
-      })
-      .catch(err => console.error(err))
-      .finally(() => setIsLoading(false))
-    });
+  useEffect(() => {
+    if (router.query.actorId) {
+      fetch(`https://api.themoviedb.org/3/person/${router.query.actorId}/movie_credits?language=en-US&api_key=6caae9adc5207699d85cff7f7a322b6e`, options)
+        .then(response => response.json())
+        .then(response => {
+          console.log(response);
+          setMoviesCredits(response.cast)
+        })
+        .catch(err => console.error(err))
+        .finally(() => setIsLoading(false))
+    }
+  }, [router.query.actorId]); // Dependency array added
 
-    console.log(actor)
+  // Fetching actor details by id
+  useEffect(() => {
+    if (router.query.actorId) {
+      fetch(`https://api.themoviedb.org/3/person/${router.query.actorId}?language=en-US&api_key=6caae9adc5207699d85cff7f7a322b6e`, optionsTrending)
+        .then(response => response.json())
+        .then(response => {
+          console.log(response)
+          setActor(response)
+        })
+        .catch(err => console.error(err))
+        .finally(() => setIsLoading(false))
+    }
+  }, [router.query.actorId]);
+
 
     function handleShowClick(){
       setShowMore(!showMore);
@@ -67,8 +68,8 @@ export default function SingleActorPage() {
               </div>
             ) : actor  ? (
               <div className="flex flex-col md:flex-row justify-center items-center 
-              md:items-start md:space-x-8 p-8">
-                <div className="bg-gradient-to-l from-white to-indigo-500/10 p-4 rounded-lg 
+              md:items-start font-serif md:space-x-8 p-8">
+                <div className="bg-gradient-to-l from-white to-indigo-500/10  p-4 rounded-lg 
                 shadow-lg mb-4 md:mb-0 flex-shrink-0 ">
                   <img
                     src={`https://image.tmdb.org/t/p/w780/${actor.profile_path}`}
@@ -83,7 +84,7 @@ export default function SingleActorPage() {
                   </p>
                   <span className="text-lg font-semibold text-white">
                   Born: {actor.birthday} <br />
-                  Popularity: {actor.popularity} %
+                  Popularity: {actor.popularity} 
                 </span>
                   <div className="text-center">
     {/* ***************************** biography button ******************************************** */}
