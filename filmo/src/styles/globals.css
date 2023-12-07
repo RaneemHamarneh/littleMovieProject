@@ -14,7 +14,15 @@
       background-position: 0% 50%;
     }
   }
+  .page-container {
+    min-height: 100vh;
+    padding-top: 23px;
+  }
   
+  .footer {
+    flex-shrink: 0;
+    width: 100%;}
+    
   .animated-gradient {
     background: linear-gradient(-45deg, #4b6cb7, #182848, #4b6cb7, #182848, #4b6cb7);
     background-size: 400% 400%;
