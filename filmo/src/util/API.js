@@ -11,7 +11,7 @@ export const optionsTrending = {
   },
 }
 
-export default function actorsEffectFetching(actors) {
+export default function ActorsEffectFetching(actors) {
   useEffect(() => {
     fetch(
       "https://api.themoviedb.org/3/trending/person/day?language=en-US&api_key=6caae9adc5207699d85cff7f7a322b6e",

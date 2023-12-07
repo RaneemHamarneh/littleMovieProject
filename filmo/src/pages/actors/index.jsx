@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react"
 import Link from "next/link"
-import actorsEffectFetching from "@component/util/API"
+import ActorsEffectFetching from "@component/util/API"
 
 export default function Actors() {
   const [actors, setActors] = useState()
 
-  actorsEffectFetching(setActors) // fetching actors page
+  ActorsEffectFetching(setActors) // fetching actors page
 
   useEffect(() => {
     document.title = `General page for Actors`
