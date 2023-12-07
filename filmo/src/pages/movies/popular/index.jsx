@@ -15,10 +15,7 @@ export async function getServerSideProps() {
 function index({ movies }) {
   return (
     <div>
-      <div className=" text-gray-200 flex items-center justify-center text-4xl mt-2">
-        Popular Movies
-      </div>
-      <div className="page-container grid grid-cols-5 gap-4 max-w-7xl w-full mx-auto">
+      <div className="grid grid-cols-5 gap-4 max-w-7xl w-full mx-auto page-container">
         {movies.map((movie) => (
           <Card key={movie.id} movie={movie} />
         ))}
